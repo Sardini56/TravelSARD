@@ -10,8 +10,7 @@
 </head>
 
 <body>
-
-  <header class="header">
+<div id="country-quiz"></div>  <header class="header">
 
     <div class="logo">
       🌍 TravelSARD
@@ -123,3 +122,119 @@
 
 </body>
 </html>
+const quizCountries = [
+  ["Deutschland", "🇩🇪"],
+  ["Frankreich", "🇫🇷"],
+  ["Türkei", "🇹🇷"],
+  ["Syrien", "🇸🇾"],
+  ["Japan", "🇯🇵"],
+  ["Brasilien", "🇧🇷"],
+  ["Kanada", "🇨🇦"],
+  ["Ägypten", "🇪🇬"],
+  ["Italien", "🇮🇹"],
+  ["Spanien", "🇪🇸"],
+  ["Ghana", "🇬🇭"],
+  ["Indien", "🇮🇳"],
+  ["China", "🇨🇳"],
+  ["Australien", "🇦🇺"],
+  ["Mexiko", "🇲🇽"],
+  ["Norwegen", "🇳🇴"],
+];
+
+let quizScore = 0;
+let quizQuestion;
+
+function shuffleQuiz(array) {
+  return [...array].sort(() => Math.random() - 0.5);
+}
+
+function createQuizQuestion() {
+  const correct =
+    quizCountries[Math.floor(Math.random() * quizCountries.length)];
+
+  const wrong = shuffleQuiz(
+    quizCountries.filter((country) => country[0] !== correct[0])
+  ).slice(0, 3);
+
+  quizQuestion = {
+    correct,
+    answers: shuffleQuiz([correct, ...wrong]),
+  };
+
+  renderQuiz();
+}
+
+function renderQuiz() {
+  const container = document.getElementById("country-quiz");
+
+  if (!container) return;
+
+  container.innerHTML = `
+    <div class="quiz-box">
+      <div class="quiz-header">
+        <div>
+          <span class="quiz-small">🌍 MINIGAME</span>
+          <h2>Länder-Raten</h2>
+        </div>
+
+        <div class="quiz-score">
+          🏆 ${quizScore}
+        </div>
+      </div>
+
+      <div class="quiz-flag">
+        ${quizQuestion.correct[1]}
+      </div>
+
+      <h3>Welches Land ist das?</h3>
+
+      <div class="quiz-answers">
+        ${quizQuestion.answers
+          .map(
+            (country) => `
+              <button
+                class="quiz-answer"
+                onclick="checkQuizAnswer('${country[0]}')"
+              >
+                ${country[0]}
+              </button>
+            `
+          )
+          .join("")}
+      </div>
+
+      <div id="quiz-result"></div>
+    </div>
+  `;
+}
+
+function checkQuizAnswer(answer) {
+  const result = document.getElementById("quiz-result");
+
+  if (answer === quizQuestion.correct[0]) {
+    quizScore++;
+
+    result.innerHTML = `
+      <div class="quiz-correct">✅ Richtig! +1 Punkt</div>
+      <button class="quiz-next" onclick="createQuizQuestion()">
+        Nächste Frage →
+      </button>
+    `;
+  } else {
+    result.innerHTML = `
+      <div class="quiz-wrong">
+        ❌ Falsch! Richtig wäre: <strong>${quizQuestion.correct[0]}</strong>
+      </div>
+
+      <button class="quiz-next" onclick="createQuizQuestion()">
+        Nächste Frage →
+      </button>
+    `;
+  }
+
+  document.querySelectorAll(".quiz-answer").forEach((button) => {
+    button.disabled = true;
+  });
+}
+
+createQuizQuestion();
