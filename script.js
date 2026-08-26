@@ -677,3 +677,12 @@ function displayCountries() {
 }
 
 document.addEventListener("DOMContentLoaded", displayCountries);
+// Add TravelSARD countries to search
+const travelSardCountries = countries.map(country => ({
+  name: country.name,
+  flag: country.flag,
+  image: country.image,
+  places: country.places
+}));
+
+console.log("TravelSARD countries loaded:", travelSardCountries.length);
