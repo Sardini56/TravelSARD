@@ -397,3 +397,74 @@ function sendFeedback() {
     feedback.value = "";
 
 }
+const countries = [
+  { name: "Türkiye", flag: "🇹🇷", places: ["Istanbul", "Galata Tower", "Cappadocia"] },
+  { name: "Syria", flag: "🇸🇾", places: ["Damascus", "Old Damascus", "Aleppo Citadel"] },
+  { name: "Egypt", flag: "🇪🇬", places: ["Cairo", "Pyramids of Giza", "Luxor"] },
+  { name: "Jordan", flag: "🇯🇴", places: ["Amman", "Petra", "Wadi Rum"] },
+  { name: "United Arab Emirates", flag: "🇦🇪", places: ["Dubai", "Abu Dhabi", "Burj Khalifa"] },
+  { name: "Saudi Arabia", flag: "🇸🇦", places: ["Riyadh", "Jeddah", "AlUla"] },
+  { name: "Morocco", flag: "🇲🇦", places: ["Marrakesh", "Casablanca", "Chefchaouen"] },
+  { name: "Tunisia", flag: "🇹🇳", places: ["Tunis", "Sidi Bou Said", "Djerba"] },
+  { name: "Germany", flag: "🇩🇪", places: ["Berlin", "Munich", "Hamburg"] },
+  { name: "France", flag: "🇫🇷", places: ["Paris", "Nice", "Lyon"] },
+  { name: "Italy", flag: "🇮🇹", places: ["Rome", "Venice", "Milan"] },
+  { name: "Spain", flag: "🇪🇸", places: ["Barcelona", "Madrid", "Seville"] },
+  { name: "Greece", flag: "🇬🇷", places: ["Athens", "Santorini", "Crete"] },
+  { name: "Portugal", flag: "🇵🇹", places: ["Lisbon", "Porto", "Madeira"] },
+  { name: "United Kingdom", flag: "🇬🇧", places: ["London", "Edinburgh", "Manchester"] },
+  { name: "Netherlands", flag: "🇳🇱", places: ["Amsterdam", "Rotterdam", "Utrecht"] },
+  { name: "Switzerland", flag: "🇨🇭", places: ["Zurich", "Geneva", "Interlaken"] },
+  { name: "Austria", flag: "🇦🇹", places: ["Vienna", "Salzburg", "Innsbruck"] },
+  { name: "Norway", flag: "🇳🇴", places: ["Oslo", "Bergen", "Tromsø"] },
+  { name: "Sweden", flag: "🇸🇪", places: ["Stockholm", "Gothenburg", "Malmö"] },
+  { name: "Japan", flag: "🇯🇵", places: ["Tokyo", "Kyoto", "Osaka"] },
+  { name: "South Korea", flag: "🇰🇷", places: ["Seoul", "Busan", "Jeju"] },
+  { name: "China", flag: "🇨🇳", places: ["Beijing", "Shanghai", "Xi'an"] },
+  { name: "Thailand", flag: "🇹🇭", places: ["Bangkok", "Phuket", "Chiang Mai"] },
+  { name: "Indonesia", flag: "🇮🇩", places: ["Bali", "Jakarta", "Lombok"] },
+  { name: "Malaysia", flag: "🇲🇾", places: ["Kuala Lumpur", "Penang", "Langkawi"] },
+  { name: "Singapore", flag: "🇸🇬", places: ["Singapore", "Marina Bay", "Sentosa"] },
+  { name: "Australia", flag: "🇦🇺", places: ["Sydney", "Melbourne", "Gold Coast"] },
+  { name: "United States", flag: "🇺🇸", places: ["New York", "Los Angeles", "Miami"] },
+  { name: "Canada", flag: "🇨🇦", places: ["Toronto", "Vancouver", "Montreal"] },
+  { name: "Mexico", flag: "🇲🇽", places: ["Mexico City", "Cancún", "Tulum"] },
+  { name: "Brazil", flag: "🇧🇷", places: ["Rio de Janeiro", "São Paulo", "Salvador"] },
+  { name: "Argentina", flag: "🇦🇷", places: ["Buenos Aires", "Mendoza", "Bariloche"] },
+  { name: "South Africa", flag: "🇿🇦", places: ["Cape Town", "Johannesburg", "Durban"] },
+  { name: "Kenya", flag: "🇰🇪", places: ["Nairobi", "Mombasa", "Maasai Mara"] },
+  { name: "Tanzania", flag: "🇹🇿", places: ["Zanzibar", "Arusha", "Serengeti"] },
+  { name: "India", flag: "🇮🇳", places: ["Mumbai", "Delhi", "Jaipur"] },
+  { name: "Albania", flag: "🇦🇱", places: ["Tirana", "Berat", "Sarandë"] },
+  { name: "Montenegro", flag: "🇲🇪", places: ["Kotor", "Budva", "Podgorica"] },
+  { name: "Georgia", flag: "🇬🇪", places: ["Tbilisi", "Batumi", "Kazbegi"] }
+];
+
+function displayCountries() {
+  const grid = document.getElementById("countryGrid");
+
+  if (!grid) return;
+
+  grid.innerHTML = "";
+
+  countries.forEach(country => {
+    const card = document.createElement("div");
+
+    card.className = "destination-card";
+
+    card.innerHTML = `
+      <div class="card-content">
+        <p>${country.flag} ${country.name}</p>
+        <h3>${country.places[0]}</h3>
+        <p>${country.places.join(" • ")}</p>
+        <button onclick="savePlace('${country.name}')">
+          ♡ Save
+        </button>
+      </div>
+    `;
+
+    grid.appendChild(card);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", displayCountries);
