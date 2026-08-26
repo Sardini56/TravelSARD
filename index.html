@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>TravelSARD</title>
+
+  <meta name="description"
+        content="TravelSARD - Discover amazing destinations, hidden gems and your next adventure.">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+
+  <div class="logo">
+    ✈️ TravelSARD
+  </div>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#explore">Explore</a>
+    <a href="#currency">Currency</a>
+    <a href="#travels">My Travels</a>
+    <a href="#wishlist">Wishlist</a>
+  </nav>
+
+  <button id="darkMode">🌙</button>
+
+</header>
+
+
+<main>
+
+<!-- HERO -->
+
+<section id="home" class="hero">
+
+  <div class="hero-text">
+
+    <p class="small-title">
+      EXPLORE THE WORLD
+    </p>
+
+    <h1>
+      Your next adventure
+      <span>starts here.</span>
+    </h1>
+
+    <p>
+      Discover amazing destinations, hidden gems,
+      unforgettable experiences and places worth visiting.
+    </p>
+
+    <div class="search">
+
+      <input
+        id="search"
+        type="text"
+        placeholder="Search a country or city..."
+      >
+
+      <button onclick="searchDestination()">
+        Explore
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="hero-image">
+
+    <img
+      src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1200&q=80"
+      alt="Istanbul"
+    >
+
+    <div class="image-text">
+
+      <small>FEATURED DESTINATION</small>
+
+      <h2>Istanbul 🇹🇷</h2>
+
+      <p>Türkiye</p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- POPULAR DESTINATIONS -->
+
+<section id="explore" class="section">
+
+  <div class="section-title">
+
+    <div>
+
+      <p class="small-title">
+        DISCOVER
+      </p>
+
+      <h2>
+        Popular destinations
+      </h2>
+
+    </div>
+
+  </div>
+
+
+  <div class="destination-grid">
+
+
+    <div class="destination-card">
+
+      <img
+        src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80"
+        alt="Paris"
+      >
+
+      <div class="card-content">
+
+        <p>🇫🇷 France</p>
+
+        <h3>Paris</h3>
+
+        <button onclick="savePlace('Paris')">
+          ♡ Save
+        </button>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="destination-card">
+
+      <img
+        src="https://images.unsplash.com/photo-1529260830199-42c24126f198?auto=format&fit=crop&w=800&q=80"
+        alt="Rome"
+      >
+
+      <div class="card-content">
+
+        <p>🇮🇹 Italy</p>
+
+        <h3>Rome</h3>
+
+        <button onclick="savePlace('Rome')">
+          ♡ Save
+        </button>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="destination-card">
+
+      <img
+        src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80"
+        alt="Tokyo"
+      >
+
+      <div class="card-content">
+
+        <p>🇯🇵 Japan</p>
+
+        <h3>Tokyo</h3>
+
+        <button onclick="savePlace('Tokyo')">
+          ♡ Save
+        </button>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="destination-card">
+
+      <img
+        src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=800&q=80"
+        alt="Istanbul"
+      >
+
+      <div class="card-content">
+
+        <p>🇹🇷 Türkiye</p>
+
+        <h3>Istanbul</h3>
+
+        <button onclick="savePlace('Istanbul')">
+          ♡ Save
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- UNDERRATED DESTINATIONS -->
+
+<section class="section underrated">
+
+  <div class="section-title">
+
+    <div>
+
+      <p class="small-title">
+        GO OFF THE MAP
+      </p>
+
+      <h2>
+        Underrated destinations
+      </h2>
+
+    </div>
+
+  </div>
+
+
+  <div class="destination-grid">
+
+
+    <div class="destination-card">
+
+      <img
+        src="https://images.unsplash.com/photo-1590845947676-fa2576f401d2?auto=format&fit=crop&w=800&q=80"
+        alt="Berat"
+      >
+
+      <div class="card-content">
+
+        <p>🇦🇱 Albania</p>
+
+        <h3>Berat</h3>
+
+        <button onclick="savePlace('Berat')">
+          ♡ Save
+        </button>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="destination-card">
+
+      <img
+        src="https://images.unsplash.com/photo-1605281317010-fe5ffe798166?auto=format&fit=crop&w=800&q=80"
+        alt="Kotor"
+      >
+
+      <div class="card-content">
+
+        <p>🇲🇪 Montenegro</p>
+
+        <h3>Kotor</h3>
+
+        <button onclick="savePlace('Kotor')">
+          ♡ Save
+        </button>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="destination-card">
+
+      <img
+        src="https://images.unsplash.com/photo-1565008576549-57569a49371d?auto=format&fit=crop&w=800&q=80"
+        alt="Tbilisi"
+      >
+
+      <div class="card-content">
+
+        <p>🇬🇪 Georgia</p>
+
+        <h3>Tbilisi</h3>
+
+        <button onclick="savePlace('Tbilisi')">
+          ♡ Save
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- CURRENCY -->
+
+<section id="currency" class="section">
+
+  <div class="section-title">
+
+    <div>
+
+      <p class="small-title">
+        TRAVEL MONEY
+      </p>
+
+      <h2>
+        Currency Converter
+      </h2>
+
+    </div>
+
+  </div>
+
+
+  <div class="converter">
+
+    <div>
+
+      <label>
+        Amount
+      </label>
+
+      <input
+        id="amount"
+        type="number"
+        value="100"
+      >
+
+    </div>
+
+
+    <div>
+
+      <label>
+        From
+      </label>
+
+      <select id="from">
+
+        <option value="EUR">
+          EUR - Euro
+        </option>
+
+        <option value="USD">
+          USD - US Dollar
+        </option>
+
+        <option value="GBP">
+          GBP - Pound
+        </option>
+
+        <option value="TRY">
+          TRY - Turkish Lira
+        </option>
+
+        <option value="EGP">
+          EGP - Egyptian Pound
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <button
+      class="swap"
+      onclick="swapCurrency()"
+    >
+      ⇄
+    </button>
+
+
+    <div>
+
+      <label>
+        To
+      </label>
+
+      <select id="to">
+
+        <option value="TRY">
+          TRY - Turkish Lira
+        </option>
+
+        <option value="EUR">
+          EUR - Euro
+        </option>
+
+        <option value="USD">
+          USD - US Dollar
+        </option>
+
+        <option value="EGP">
+          EGP - Egyptian Pound
+        </option>
+
+        <option value="GBP">
+          GBP - Pound
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <button
+      class="convert-button"
+      onclick="convertCurrency()"
+    >
+      Convert
+    </button>
+
+
+    <div class="conversion-result">
+
+      <small>
+        Estimated conversion
+      </small>
+
+      <h3 id="result">
+        —
+      </h3>
+
+      <p>
+        Demo exchange rates
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- MY TRAVELS -->
+
+<section id="travels" class="section travels">
+
+  <p class="small-title">
+    YOUR JOURNEY
+  </p>
+
+  <h2>
+    My Travels
+  </h2>
+
+
+  <div class="stats">
+
+    <div>
+
+      <strong id="visited">
+        0
+      </strong>
+
+      <span>
+        Countries visited
+      </span>
+
+    </div>
+
+
+    <div>
+
+      <strong id="saved">
+        0
+      </strong>
+
+      <span>
+        Saved destinations
+      </span>
+
+    </div>
+
+
+    <div>
+
+      <strong>
+        40
+      </strong>
+
+      <span>
+        Countries available
+      </span>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- WISHLIST -->
+
+<section id="wishlist" class="section">
+
+  <p class="small-title">
+    SAVE FOR LATER
+  </p>
+
+  <h2>
+    My Wishlist ❤️
+  </h2>
+
+
+  <div id="wishlistContent" class="wishlist">
+
+    Your wishlist is empty.
+
+  </div>
+
+</section>
+
+
+
+<!-- FEEDBACK -->
+
+<section class="section">
+
+  <div class="feedback">
+
+    <div>
+
+      <p class="small-title">
+        FEEDBACK
+      </p>
+
+      <h2>
+        Help us improve TravelSARD
+      </h2>
+
+      <p>
+        Tell us what you think about the website
+        and what you want to see next.
+      </p>
+
+    </div>
+
+
+    <div>
+
+      <textarea
+        id="feedback"
+        placeholder="Write your feedback..."
+      ></textarea>
+
+      <button onclick="sendFeedback()">
+        Send Feedback
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+
+<!-- FOOTER -->
+
+<footer>
+
+  <div>
+
+    <h3>
+      ✈️ TravelSARD
+    </h3>
+
+    <p>
+      Discover. Travel. Remember.
+    </p>
+
+  </div>
+
+
+  <div>
+
+    <p>
+      © 2026 TravelSARD
+    </p>
+
+  </div>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
