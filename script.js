@@ -188,73 +188,53 @@ document.addEventListener(
     updateWishlist
 );
 
-
-
 // -------------------------------
 // SEARCH
 // -------------------------------
 
 function searchDestination() {
 
-    const input =
-        document.getElementById("search");
+    const input = document.getElementById("search");
 
-    const search =
-        input.value
-            .trim()
-            .toLowerCase();
+    if (!input) return;
 
+    const search = input.value.trim().toLowerCase();
 
     if (!search) {
-
-        alert(
-            "Please enter a country or destination."
-        );
-
+        alert("Please enter a country or destination.");
         return;
     }
 
+    const foundCountry = countries.find(country => {
 
-    const destinations = [
+        const countryName =
+            country.name.toLowerCase();
 
-        "istanbul",
-        "paris",
-        "rome",
-        "tokyo",
-        "berat",
-        "kotor",
-        "tbilisi"
+        const places =
+            country.places.join(" ").toLowerCase();
 
-    ];
+        return (
+            countryName.includes(search) ||
+            places.includes(search)
+        );
 
+    });
 
-    const found =
-        destinations.find(function(destination) {
-
-            return destination.includes(search);
-
-        });
-
-
-    if (found) {
+    if (foundCountry) {
 
         alert(
-            "We found " +
-            found.charAt(0).toUpperCase() +
-            found.slice(1) +
-            " 🌍"
+            `${foundCountry.flag} ${foundCountry.name} found! 🌍`
         );
 
     } else {
 
         alert(
-            "This destination isn't in our first collection yet. More destinations are coming soon!"
+            "This country or destination isn't in our collection yet. 🌍"
         );
 
     }
 
 }
-
 
 
 // -------------------------------
