@@ -1,240 +1,1026 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>TravelSARD – Entdecke die Welt</title>
+<title>TravelSARD</title>
 
-  <link rel="stylesheet" href="style.css">
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+    color: #172033;
+    transition: 0.3s;
+}
+
+body.dark {
+    background: #111827;
+    color: white;
+}
+
+header {
+    height: 70px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+body.dark header {
+    background: #1f2937;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+nav button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 15px;
+    color: inherit;
+}
+
+.language {
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+.hero {
+    text-align: center;
+    padding: 80px 20px 50px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 18px;
+    color: #667085;
+    margin-bottom: 30px;
+}
+
+body.dark .hero p {
+    color: #cbd5e1;
+}
+
+.search-box {
+    max-width: 650px;
+    margin: auto;
+    display: flex;
+    gap: 10px;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    font-size: 16px;
+}
+
+.search-box button {
+    padding: 16px 25px;
+    border: none;
+    border-radius: 12px;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.search-results {
+    max-width: 650px;
+    margin: 25px auto;
+    text-align: left;
+}
+
+.result-card {
+    background: white;
+    padding: 18px;
+    margin-bottom: 10px;
+    border-radius: 14px;
+    cursor: pointer;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+
+body.dark .result-card {
+    background: #1f2937;
+}
+
+section {
+    padding: 50px 30px;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 32px;
+}
+
+.country-grid {
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.country-card {
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+body.dark .country-card {
+    background: #1f2937;
+}
+
+.country-card img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+}
+
+.country-content {
+    padding: 18px;
+}
+
+.country-content h3 {
+    margin: 8px 0;
+}
+
+.country-content p {
+    color: #667085;
+}
+
+body.dark .country-content p {
+    color: #cbd5e1;
+}
+
+.save-btn {
+    margin-top: 15px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+}
+
+.map-box {
+    max-width: 1100px;
+    height: 350px;
+    margin: auto;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+}
+
+body.dark .map-box {
+    background: #1e3a5f;
+}
+
+.quiz-page {
+    max-width: 700px;
+    margin: auto;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.quiz-box {
+    background: white;
+    padding: 40px;
+    border-radius: 25px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+}
+
+body.dark .quiz-box {
+    background: #1f2937;
+}
+
+.quiz-flag {
+    font-size: 100px;
+    margin: 30px 0;
+}
+
+.quiz-answers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.quiz-answer {
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    background: #e5e7eb;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+body.dark .quiz-answer {
+    background: #374151;
+    color: white;
+}
+
+.quiz-answer:hover {
+    background: #2563eb;
+    color: white;
+}
+
+.quiz-result {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.next-btn {
+    margin-top: 15px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+}
+
+.back-btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #64748b;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 25px;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    margin-top: 50px;
+    background: #172033;
+    color: white;
+}
+
+@media (max-width: 600px) {
+
+    header {
+        padding: 0 15px;
+    }
+
+    nav {
+        gap: 8px;
+    }
+
+    .hero h1 {
+        font-size: 34px;
+    }
+
+    .search-box {
+        flex-direction: column;
+    }
+
+    .quiz-answers {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
 </head>
 
 <body>
-<div id="country-quiz"></div>  <header class="header">
+
+<header>
 
     <div class="logo">
-      🌍 TravelSARD
+        🌍 TravelSARD
     </div>
 
     <nav>
-      <a href="#" id="homeLink">Home</a>
-      <a href="#countries">Länder</a>
+
+        <button onclick="showPage('home')">
+            🏠 <span data-de="Home" data-en="Home">Home</span>
+        </button>
+
+        <button onclick="showPage('countries')">
+            🌎 <span data-de="Länder" data-en="Countries">Länder</span>
+        </button>
+
+        <button onclick="showPage('quiz')">
+            🎮 <span data-de="Länder-Raten" data-en="Country Quiz">Länder-Raten</span>
+        </button>
+
+        <select class="language" id="languageSelect">
+            <option value="de">🇩🇪 Deutsch</option>
+            <option value="en">🇬🇧 English</option>
+        </select>
+
+        <button onclick="toggleDarkMode()" id="darkButton">
+            🌙
+        </button>
+
     </nav>
 
-  </header>
+</header>
 
 
-  <main>
+<!-- HOME -->
 
-    <!-- STARTSEITE -->
+<div id="home" class="page active">
 
-    <section id="homePage" class="page">
+    <div class="hero">
 
-      <div class="hero">
+        <h1 data-de="Entdecke die Welt 🌎"
+            data-en="Discover the World 🌎">
+            Entdecke die Welt 🌎
+        </h1>
 
-        <h1>Entdecke die Welt 🌎</h1>
-
-        <p>
-          Suche ein Land und entdecke seine Geschichte,
-          Kultur, Sehenswürdigkeiten und vieles mehr.
+        <p data-de="Suche ein Land oder Reiseziel und entdecke die Welt."
+           data-en="Search for a country or destination and discover the world.">
+            Suche ein Land oder Reiseziel und entdecke die Welt.
         </p>
 
+        <div class="search-box">
 
-        <div class="searchBox">
+            <input
+                id="searchInput"
+                type="text"
+                placeholder="Land oder Reiseziel suchen..."
+            >
 
-          <input
-            id="countrySearch"
-            type="text"
-            placeholder="Suche ein Land..."
-            autocomplete="off"
-          >
-
-          <button id="searchButton">
-            🔎 Suchen
-          </button>
+            <button onclick="searchCountry()">
+                🔎 <span data-de="Suchen" data-en="Search">
+                    Suchen
+                </span>
+            </button>
 
         </div>
 
+        <div id="searchResults" class="search-results"></div>
 
-        <div id="searchResults"></div>
-
-      </div>
+    </div>
 
 
-      <!-- WELTKARTE -->
+    <section>
 
-      <section class="mapSection">
+        <h2 class="section-title"
+            data-de="🗺️ Die Welt entdecken"
+            data-en="🗺️ Discover the World">
+            🗺️ Die Welt entdecken
+        </h2>
 
-        <h2>🗺️ Die Welt entdecken</h2>
-
-        <div id="worldMap">
-          <div class="mapMessage">
-            Wähle ein Land aus der Liste oder benutze die Suche.
-          </div>
+        <div class="map-box">
+            🌍
         </div>
 
-      </section>
+    </section>
+
+</div>
 
 
-      <!-- ALLE LÄNDER -->
+<!-- COUNTRIES -->
 
-      <section id="countries" class="countriesSection">
+<div id="countries" class="page">
 
-        <h2>🌎 Alle Länder</h2>
+    <section>
 
-        <div id="countryList" class="countryGrid"></div>
+        <h2 class="section-title"
+            data-de="🌎 Alle Länder"
+            data-en="🌎 All Countries">
+            🌎 Alle Länder
+        </h2>
 
-      </section>
+        <div id="countryGrid" class="country-grid"></div>
 
     </section>
 
-
-    <!-- LÄNDERSEITE -->
-
-    <section
-      id="countryPage"
-      class="page hidden"
-    >
-
-      <button id="backButton" class="backButton">
-        ← Zurück zu den Ländern
-      </button>
+</div>
 
 
-      <div id="countryContent"></div>
+<!-- QUIZ -->
 
-    </section>
+<div id="quiz" class="page">
 
-  </main>
+    <div class="quiz-page">
+
+        <button class="back-btn"
+                onclick="showPage('home')">
+            ← <span data-de="Zurück"
+                    data-en="Back">
+                Zurück
+            </span>
+        </button>
+
+        <div class="quiz-box">
+
+            <h1 data-de="🎮 Länder-Raten"
+                data-en="🎮 Country Quiz">
+                🎮 Länder-Raten
+            </h1>
+
+            <p style="margin-top:10px;"
+               data-de="Erkennst du die Flagge?"
+               data-en="Can you recognize the flag?">
+                Erkennst du die Flagge?
+            </p>
+
+            <div id="quizFlag" class="quiz-flag">
+                🇩🇪
+            </div>
+
+            <h2 id="quizQuestion">
+                Welches Land ist das?
+            </h2>
+
+            <div id="quizAnswers"
+                 class="quiz-answers">
+            </div>
+
+            <div id="quizResult"
+                 class="quiz-result">
+            </div>
+
+            <p style="margin-top:20px;">
+                🏆 <span data-de="Punkte"
+                        data-en="Score">
+                    Punkte
+                </span>:
+                <strong id="quizScore">0</strong>
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
 
 
-  <footer>
-
-    <p>
-      © 2026 TravelSARD
-    </p>
-
-  </footer>
+<footer>
+    © 2026 TravelSARD 🌍
+</footer>
 
 
-  <script src="countries.js"></script>
-  <script src="script.js"></script>
+<script>
 
-</body>
-</html>
+
+// ================================
+// COUNTRIES
+// ================================
+
+const countries = [
+
+    {
+        name: "Deutschland",
+        english: "Germany",
+        flag: "🇩🇪",
+        places: "Berlin • München • Hamburg",
+        image: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=800&q=80"
+    },
+
+    {
+        name: "Frankreich",
+        english: "France",
+        flag: "🇫🇷",
+        places: "Paris • Nizza • Lyon",
+        image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80"
+    },
+
+    {
+        name: "Türkei",
+        english: "Türkiye",
+        flag: "🇹🇷",
+        places: "Istanbul • Antalya • Kappadokien",
+        image: "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=800&q=80"
+    },
+
+    {
+        name: "Syrien",
+        english: "Syria",
+        flag: "🇸🇾",
+        places: "Damaskus • Aleppo • Homs",
+        image: "https://images.unsplash.com/photo-1577083552431-6e5fd01988a5?auto=format&fit=crop&w=800&q=80"
+    },
+
+    {
+        name: "Italien",
+        english: "Italy",
+        flag: "🇮🇹",
+        places: "Rom • Venedig • Mailand",
+        image: "https://images.unsplash.com/photo-1529260830199-42c24126f198?auto=format&fit=crop&w=800&q=80"
+    },
+
+    {
+        name: "Spanien",
+        english: "Spain",
+        flag: "🇪🇸",
+        places: "Barcelona • Madrid • Sevilla",
+        image: "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=800&q=80"
+    },
+
+    {
+        name: "Japan",
+        english: "Japan",
+        flag: "🇯🇵",
+        places: "Tokio • Kyoto • Osaka",
+        image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=800&q=80"
+    },
+
+    {
+        name: "Ägypten",
+        english: "Egypt",
+        flag: "🇪🇬",
+        places: "Kairo • Gizeh • Luxor",
+        image: "https://images.unsplash.com/photo-1568322445389-f64ac2515020?auto=format&fit=crop&w=800&q=80"
+    },
+
+    {
+        name: "Brasilien",
+        english: "Brazil",
+        flag: "🇧🇷",
+        places: "Rio de Janeiro • São Paulo • Salvador",
+        image: "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?auto=format&fit=crop&w=800&q=80"
+    },
+
+    {
+        name: "Kanada",
+        english: "Canada",
+        flag: "🇨🇦",
+        places: "Toronto • Vancouver • Montréal",
+        image: "https://images.unsplash.com/photo-1517935706615-2717063c2225?auto=format&fit=crop&w=800&q=80"
+    },
+
+    {
+        name: "Australien",
+        english: "Australia",
+        flag: "🇦🇺",
+        places: "Sydney • Melbourne • Gold Coast",
+        image: "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d5?auto=format&fit=crop&w=800&q=80"
+    },
+
+    {
+        name: "Albanien",
+        english: "Albania",
+        flag: "🇦🇱",
+        places: "Tirana • Berat • Sarandë",
+        image: "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80"
+    }
+
+];
+
+
+// ================================
+// PAGE SYSTEM
+// ================================
+
+function showPage(page) {
+
+    document.querySelectorAll(".page")
+        .forEach(function(p) {
+            p.classList.remove("active");
+        });
+
+    document.getElementById(page)
+        .classList.add("active");
+
+    window.scrollTo(0, 0);
+}
+
+
+// ================================
+// DISPLAY COUNTRIES
+// ================================
+
+function displayCountries() {
+
+    const grid =
+        document.getElementById("countryGrid");
+
+    grid.innerHTML = "";
+
+    countries.forEach(function(country) {
+
+        const name =
+            currentLanguage === "de"
+                ? country.name
+                : country.english;
+
+        const card =
+            document.createElement("div");
+
+        card.className = "country-card";
+
+        card.innerHTML = `
+
+            <img src="${country.image}">
+
+            <div class="country-content">
+
+                <h3>
+                    ${country.flag} ${name}
+                </h3>
+
+                <p>
+                    ${country.places}
+                </p>
+
+                <button
+                    class="save-btn"
+                    onclick="saveCountry('${name}')">
+
+                    ❤️
+                    ${currentLanguage === "de"
+                        ? "Speichern"
+                        : "Save"}
+
+                </button>
+
+            </div>
+        `;
+
+        grid.appendChild(card);
+    });
+}
+
+
+// ================================
+// SEARCH
+// ================================
+
+function searchCountry() {
+
+    const input =
+        document.getElementById("searchInput");
+
+    const results =
+        document.getElementById("searchResults");
+
+    const query =
+        input.value.trim().toLowerCase();
+
+    results.innerHTML = "";
+
+    if (!query) {
+
+        results.innerHTML =
+            "<p>❌ Bitte gib ein Land oder Reiseziel ein.</p>";
+
+        return;
+    }
+
+    const found =
+        countries.filter(function(country) {
+
+            return (
+                country.name.toLowerCase().includes(query) ||
+                country.english.toLowerCase().includes(query) ||
+                country.places.toLowerCase().includes(query)
+            );
+
+        });
+
+    if (found.length === 0) {
+
+        results.innerHTML =
+            "<p>❌ Kein Ergebnis gefunden.</p>";
+
+        return;
+    }
+
+    found.forEach(function(country) {
+
+        const name =
+            currentLanguage === "de"
+                ? country.name
+                : country.english;
+
+        const card =
+            document.createElement("div");
+
+        card.className = "result-card";
+
+        card.innerHTML = `
+            <strong>
+                ${country.flag} ${name}
+            </strong>
+
+            <br>
+
+            <small>
+                ${country.places}
+            </small>
+        `;
+
+        results.appendChild(card);
+    });
+}
+
+
+// ENTER = SEARCH
+
+document.getElementById("searchInput")
+    .addEventListener("keydown", function(event) {
+
+        if (event.key === "Enter") {
+            searchCountry();
+        }
+
+    });
+
+
+// ================================
+// WISHLIST
+// ================================
+
+let wishlist =
+    JSON.parse(
+        localStorage.getItem("travelSARD_wishlist")
+    ) || [];
+
+
+function saveCountry(country) {
+
+    if (!wishlist.includes(country)) {
+
+        wishlist.push(country);
+
+        localStorage.setItem(
+            "travelSARD_wishlist",
+            JSON.stringify(wishlist)
+        );
+
+        alert(
+            currentLanguage === "de"
+                ? country + " wurde gespeichert ❤️"
+                : country + " was saved ❤️"
+        );
+
+    } else {
+
+        alert(
+            currentLanguage === "de"
+                ? country + " ist bereits gespeichert."
+                : country + " is already saved."
+        );
+
+    }
+}
+
+
+// ================================
+// DARK MODE
+// ================================
+
+function toggleDarkMode() {
+
+    document.body.classList.toggle("dark");
+
+    document.getElementById("darkButton")
+        .textContent =
+            document.body.classList.contains("dark")
+                ? "☀️"
+                : "🌙";
+}
+
+
+// ================================
+// LANGUAGE
+// ================================
+
+let currentLanguage =
+    localStorage.getItem("travelSARD_language")
+    || "de";
+
+
+function changeLanguage() {
+
+    currentLanguage =
+        document.getElementById("languageSelect").value;
+
+    localStorage.setItem(
+        "travelSARD_language",
+        currentLanguage
+    );
+
+    document.querySelectorAll("[data-de]")
+        .forEach(function(element) {
+
+            element.textContent =
+                element.getAttribute(
+                    "data-" + currentLanguage
+                );
+
+        });
+
+    document.getElementById("searchInput")
+        .placeholder =
+            currentLanguage === "de"
+                ? "Land oder Reiseziel suchen..."
+                : "Search country or destination...";
+
+    displayCountries();
+}
+
+
+document.getElementById("languageSelect")
+    .value = currentLanguage;
+
+document.getElementById("languageSelect")
+    .addEventListener(
+        "change",
+        changeLanguage
+    );
+
+
+// ================================
+// QUIZ
+// ================================
+
 const quizCountries = [
-  ["Deutschland", "🇩🇪"],
-  ["Frankreich", "🇫🇷"],
-  ["Türkei", "🇹🇷"],
-  ["Syrien", "🇸🇾"],
-  ["Japan", "🇯🇵"],
-  ["Brasilien", "🇧🇷"],
-  ["Kanada", "🇨🇦"],
-  ["Ägypten", "🇪🇬"],
-  ["Italien", "🇮🇹"],
-  ["Spanien", "🇪🇸"],
-  ["Ghana", "🇬🇭"],
-  ["Indien", "🇮🇳"],
-  ["China", "🇨🇳"],
-  ["Australien", "🇦🇺"],
-  ["Mexiko", "🇲🇽"],
-  ["Norwegen", "🇳🇴"],
+    ["Deutschland", "🇩🇪"],
+    ["Frankreich", "🇫🇷"],
+    ["Türkei", "🇹🇷"],
+    ["Syrien", "🇸🇾"],
+    ["Japan", "🇯🇵"],
+    ["Brasilien", "🇧🇷"],
+    ["Kanada", "🇨🇦"],
+    ["Ägypten", "🇪🇬"],
+    ["Italien", "🇮🇹"],
+    ["Spanien", "🇪🇸"],
+    ["Australien", "🇦🇺"],
+    ["Albanien", "🇦🇱"]
 ];
 
 let quizScore = 0;
-let quizQuestion;
+let currentQuestion;
 
-function shuffleQuiz(array) {
-  return [...array].sort(() => Math.random() - 0.5);
+
+function randomQuizQuestion() {
+
+    const correct =
+        quizCountries[
+            Math.floor(
+                Math.random() *
+                quizCountries.length
+            )
+        ];
+
+    let answers = [
+        correct
+    ];
+
+    while (answers.length < 4) {
+
+        const random =
+            quizCountries[
+                Math.floor(
+                    Math.random() *
+                    quizCountries.length
+                )
+            ];
+
+        if (
+            !answers.some(
+                a => a[0] === random[0]
+            )
+        ) {
+
+            answers.push(random);
+
+        }
+    }
+
+    answers.sort(
+        () => Math.random() - 0.5
+    );
+
+    currentQuestion = correct;
+
+    document.getElementById("quizFlag")
+        .textContent = correct[1];
+
+    document.getElementById("quizResult")
+        .textContent = "";
+
+    const container =
+        document.getElementById("quizAnswers");
+
+    container.innerHTML = "";
+
+    answers.forEach(function(country) {
+
+        const button =
+            document.createElement("button");
+
+        button.className =
+            "quiz-answer";
+
+        button.textContent =
+            country[0];
+
+        button.onclick = function() {
+
+            checkAnswer(country[0]);
+
+        };
+
+        container.appendChild(button);
+
+    });
+
+    document.getElementById("quizQuestion")
+        .textContent =
+            currentLanguage === "de"
+                ? "Welches Land ist das?"
+                : "Which country is this?";
 }
 
-function createQuizQuestion() {
-  const correct =
-    quizCountries[Math.floor(Math.random() * quizCountries.length)];
 
-  const wrong = shuffleQuiz(
-    quizCountries.filter((country) => country[0] !== correct[0])
-  ).slice(0, 3);
+function checkAnswer(answer) {
 
-  quizQuestion = {
-    correct,
-    answers: shuffleQuiz([correct, ...wrong]),
-  };
+    const result =
+        document.getElementById("quizResult");
 
-  renderQuiz();
+    document.querySelectorAll(
+        ".quiz-answer"
+    ).forEach(
+        button => button.disabled = true
+    );
+
+    if (answer === currentQuestion[0]) {
+
+        quizScore++;
+
+        result.textContent =
+            currentLanguage === "de"
+                ? "✅ Richtig! +1 Punkt"
+                : "✅ Correct! +1 point";
+
+    } else {
+
+        result.textContent =
+            currentLanguage === "de"
+                ? "❌ Falsch! Richtig: " + currentQuestion[0]
+                : "❌ Wrong! Correct: " + currentQuestion[0];
+
+    }
+
+    setTimeout(
+        randomQuizQuestion,
+        1200
+    );
+
+    document.getElementById("quizScore")
+        .textContent = quizScore;
 }
 
-function renderQuiz() {
-  const container = document.getElementById("country-quiz");
 
-  if (!container) return;
+// ================================
+// START
+// ================================
 
-  container.innerHTML = `
-    <div class="quiz-box">
-      <div class="quiz-header">
-        <div>
-          <span class="quiz-small">🌍 MINIGAME</span>
-          <h2>Länder-Raten</h2>
-        </div>
+displayCountries();
+changeLanguage();
+randomQuizQuestion();
 
-        <div class="quiz-score">
-          🏆 ${quizScore}
-        </div>
-      </div>
+</script>
 
-      <div class="quiz-flag">
-        ${quizQuestion.correct[1]}
-      </div>
-
-      <h3>Welches Land ist das?</h3>
-
-      <div class="quiz-answers">
-        ${quizQuestion.answers
-          .map(
-            (country) => `
-              <button
-                class="quiz-answer"
-                onclick="checkQuizAnswer('${country[0]}')"
-              >
-                ${country[0]}
-              </button>
-            `
-          )
-          .join("")}
-      </div>
-
-      <div id="quiz-result"></div>
-    </div>
-  `;
-}
-
-function checkQuizAnswer(answer) {
-  const result = document.getElementById("quiz-result");
-
-  if (answer === quizQuestion.correct[0]) {
-    quizScore++;
-
-    result.innerHTML = `
-      <div class="quiz-correct">✅ Richtig! +1 Punkt</div>
-      <button class="quiz-next" onclick="createQuizQuestion()">
-        Nächste Frage →
-      </button>
-    `;
-  } else {
-    result.innerHTML = `
-      <div class="quiz-wrong">
-        ❌ Falsch! Richtig wäre: <strong>${quizQuestion.correct[0]}</strong>
-      </div>
-
-      <button class="quiz-next" onclick="createQuizQuestion()">
-        Nächste Frage →
-      </button>
-    `;
-  }
-
-  document.querySelectorAll(".quiz-answer").forEach((button) => {
-    button.disabled = true;
-  });
-}
-
-createQuizQuestion();
+</body>
+</html>
